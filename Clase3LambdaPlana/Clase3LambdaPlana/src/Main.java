@@ -4,6 +4,7 @@ import java.util.stream.Collectors;
 
 public class Main {
 
+
     public static void main (String[] args)
     {
 
@@ -46,7 +47,7 @@ public class Main {
 
         //combino foreach con joining
         listaDeCadenas.stream().forEach(cadena -> {
-            if (cadena.length()>4) //debo refactorizar para pasar este int como parametro
+            if (cadena.length()>4) //ver abajo: refactorizar para pasar este int como parametro
             {
                 cadenaResultante.add(cadena);
             }
@@ -56,5 +57,22 @@ public class Main {
         String cadenaUnida = cadenaResultante.stream().collect(Collectors.joining(", "));
 
         System.out.println(cadenaUnida);
+
+    }
+
+    public String unidaConCondicion(List<String> listaDeStrings, int n)
+    {
+        List<String> cadenaResultante = new ArrayList<>();
+
+        //combino foreach con joining
+        listaDeStrings.stream().forEach(cadena -> {
+            if (cadena.length()>n)
+            {
+                cadenaResultante.add(cadena);
+            }
+        });
+
+        String cadenaUnidaCondicion = cadenaResultante.stream().collect(Collectors.joining(", "));
+        return cadenaUnidaCondicion;
     }
 }
