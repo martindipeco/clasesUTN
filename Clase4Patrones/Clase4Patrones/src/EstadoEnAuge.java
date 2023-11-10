@@ -1,9 +1,16 @@
 public class EstadoEnAuge extends  Estado{
+    public EstadoEnAuge()
+    {
+        this.icono = "Rocket";
+        //System.out.println("Estoy en Auge");
+    }
     @Override
     public void actuar(ContextoCancion contextoCancion) {
+
         if(this.cumpleCondicionDeTendencia(contextoCancion))
         {
             contextoCancion.cambiarEstado(new EstadoEnTendencia());
+            return;
         }
         if(this.cumpleCondicionDeNormal(contextoCancion))
         {
@@ -11,13 +18,9 @@ public class EstadoEnAuge extends  Estado{
         }
     }
 
-    private boolean cumpleCondicionDeTendencia(ContextoCancion contextoCancion)
-    {
-        return (contextoCancion.getReproducciones()>Categorias.getReprosParaTendencia())&&(contextoCancion.getLikes()>Categorias.getLikesParaTendencia());
-    }
-
-    private boolean cumpleCondicionDeNormal(ContextoCancion contextoCancion)
-    {
-        return contextoCancion.getDislikes()>=Categorias.getDislikesParaNormal();
+    @Override
+    public void escribirLeyenda(ContextoCancion contextoCancion) {
+        this.leyenda = contextoCancion.getArtista() + " - " + contextoCancion.getNombreCancion() + " ( "+ contextoCancion.getAlbum() + " - " + contextoCancion.getAnio() + " )" ;
+        super.escribirLeyenda(contextoCancion);
     }
 }
